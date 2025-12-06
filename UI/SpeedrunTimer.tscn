@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://dk5vpl76b6wwt"]
+
+[ext_resource type="Script" uid="uid://boqdnbpo7k52y" path="res://UI/SpeedrunTimer.gd" id="1_10h67"]
+
+[node name="SpeedrunTimer" type="Node2D"]
+
+[node name="SpeedrunTimer" type="CanvasLayer" parent="."]
+script = ExtResource("1_10h67")
+
+[node name="Label" type="Label" parent="SpeedrunTimer"]
+offset_right = 40.0
+offset_bottom = 23.0

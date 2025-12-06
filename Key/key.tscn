@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://25u010u4qgyy"]
+
+[ext_resource type="Texture2D" uid="uid://b8x3rv8tdlcbm" path="res://Art/Circle.png" id="1_o17sg"]
+[ext_resource type="Script" uid="uid://dvc3sls76yrfk" path="res://Key/key.gd" id="2_xu6t2"]
+[ext_resource type="PackedScene" uid="uid://ds1qui6g2adrj" path="res://Key/KeyPlatform.tscn" id="3_xu6t2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_peb4y"]
+
+[node name="Key" type="Node2D"]
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+script = ExtResource("2_xu6t2")
+
+[node name="Circle" type="Sprite2D" parent="Area2D"]
+modulate = Color(0.9092011, 0.8479006, 0.5171798, 1)
+self_modulate = Color(0, 1, 1, 0.4862745)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_o17sg")
+
+[node name="KeyPlatform" parent="Area2D" instance=ExtResource("3_xu6t2")]
+position = Vector2(-30796, -915)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(-11.867287, 12.082342)
+shape = SubResource("CircleShape2D_peb4y")
+debug_color = Color(0.9358968, 1.915604e-05, 0.6365744, 0.41960785)
+
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]

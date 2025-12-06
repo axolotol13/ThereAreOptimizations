@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://csh6lxuuwwanv"]
+
+[ext_resource type="Script" uid="uid://dckg08xxleyov" path="res://UI/InpurMirror.gd" id="1_6f8ub"]
+[ext_resource type="Script" uid="uid://dye8u3tf0wish" path="res://UI/centerControl.gd" id="2_q7n6d"]
+
+[node name="InputMirror" type="Node2D"]
+
+[node name="InputMirror" type="CanvasLayer" parent="."]
+script = ExtResource("1_6f8ub")
+
+[node name="Panel" type="Control" parent="InputMirror"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_q7n6d")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="InputMirror/Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBox" type="VBoxContainer" parent="InputMirror/Panel/ScrollContainer"]
+layout_mode = 2
