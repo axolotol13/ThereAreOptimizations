@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="There Are Optimizations"
-run/main_scene="res://World/World.tscn"
+run/main_scene="uid://4k8lk44daaqc"
 config/features=PackedStringArray("4.5")
 config/icon="res://Art/icon.png"
 config/windows_native_icon="res://icon.ico"

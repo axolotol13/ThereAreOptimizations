@@ -7,7 +7,12 @@ var input_log: Array = ["_"]
 @onready var scroll := $Panel/ScrollContainer
 
 
+func _ready():
+	visible = Global.show_input_mirror
+
 func _process(delta):
+	if not visible:
+		return
 	var symbols := ""
 
 	

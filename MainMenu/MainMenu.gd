@@ -1,9 +1,9 @@
 extends Control
 
 func _ready():
-	$VBoxContainer/TimerToggle.text = "Speedrun Timer"
-	$VBoxContainer/InputMirrorToggle.text = "Input Mirror"
-
+	$VBoxContainer/TimerToggle.toggled.connect(_on_TimerToggle_toggled)
+	$VBoxContainer/InputMirrorToggle.toggled.connect(_on_InputMirrorToggle_toggled)
+	$VBoxContainer/PlayButton.pressed.connect(_on_PlayButton_pressed)
 func _on_TimerToggle_toggled(pressed):
 	Global.show_timer = pressed
 

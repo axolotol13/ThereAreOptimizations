@@ -8,8 +8,9 @@ func _ready():
 func _process(delta):
 	if not visible:
 		return
-	time += delta
-	$TimeLabel.text = format_time(time)
+	if Global.isCounting:
+		time += delta
+		$TimeLabel.text = format_time(time)
 
 func format_time(t):
 	var minutes = int(t / 60)
