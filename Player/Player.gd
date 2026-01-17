@@ -7,7 +7,7 @@ var x_dir := 1
 @export var acceleration: float = 2880
 @export var turning_acceleration : float = 9600
 @export var deceleration: float = 3200
-
+@export var dash_force: float = 1700
 
 @export var gravity_acceleration : float = 3840
 @export var gravity_max : float = 1020
@@ -50,16 +50,16 @@ func _physics_process(delta: float) -> void:
 func x_movement(delta: float) -> void:
 	x_dir = get_input()["x"]
 	
-
+	#Stop moving when not pressing left|right
 	if x_dir == 0: 
 		velocity.x = Vector2(velocity.x, 0).move_toward(Vector2(0,0), deceleration * delta).x
 		return
 	
-
+	#Stop accelerating when over max speed
 	if abs(velocity.x) >= max_speed and sign(velocity.x) == x_dir:
 		return
 	
-
+	
 	var accel_rate : float = acceleration if sign(velocity.x) == x_dir else turning_acceleration
 	
 
@@ -84,7 +84,7 @@ func jump_logic(_delta: float) -> void:
 	if get_input()["just_jump"]:
 		jump_buffer_timer = jump_buffer
 	
-	
+	#Handle cyote time and jumping
 	if jump_coyote_timer > 0 and jump_buffer_timer > 0 and not is_jumping:
 		is_jumping = true
 		jump_coyote_timer = 0
@@ -92,10 +92,10 @@ func jump_logic(_delta: float) -> void:
 
 		if velocity.y > 0:
 			velocity.y -= velocity.y
-		
+		#Only add upwards velocity to the max jump force
 		velocity.y = -jump_force
 	
-	
+	#Stop adding upwards velocity when jump is released
 	if get_input()["released_jump"] and velocity.y < 0:
 		velocity.y -= (jump_cut * velocity.y)
 	
@@ -114,7 +114,7 @@ func apply_gravity(delta: float) -> void:
 	if velocity.y <= gravity_max:
 		applied_gravity = gravity_acceleration * delta
 	
-	
+	#Stop accelerating downwards after reaching max gravity
 	if (is_jumping and velocity.y < 0) and velocity.y > jump_gravity_max:
 		applied_gravity = 0
 
@@ -123,14 +123,19 @@ func apply_gravity(delta: float) -> void:
 	
 	velocity.y += applied_gravity
 
-
+func Dash():
+	#Dash
+	velocity.x = dash_force * face_direction
 func timers(delta: float) -> void:
 
 	jump_coyote_timer -= delta
 	jump_buffer_timer -= delta
 
+#Handle the input of extra events
 func _input(event):
 	if event is InputEventKey and event.pressed and event.keycode == KEY_R:
 		get_tree().reload_current_scene()
+	if event is InputEventKey and event.pressed and event.keycode == KEY_K:
+		Dash()
 	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
 		get_tree().change_scene_to_file("res://MainMenu.tscn")

@@ -62,3 +62,11 @@ uppercase = true
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(5, 5)
 scale = Vector2(1.4000006, 1)
+
+[node name="Label" type="Label" parent="."]
+offset_left = -357.0
+offset_top = -388.0
+offset_right = -170.0
+offset_bottom = -365.0
+scale = Vector2(3.692532, 6.8408136)
+text = "There are Optimizations"
